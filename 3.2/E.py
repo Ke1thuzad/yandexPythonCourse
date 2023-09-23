@@ -2,13 +2,13 @@ def solution(n: int, m: int):
     ovs = set()
     mannaya = set()
     for i in range(n + m):
-        if i % 2 != 0:
+        if i % 2 != 0 and len(ovs) < m or len(mannaya) >= n:
             ovs.add(input())
         else:
             mannaya.add(input())
-    intersect = mannaya.symmetric_difference(ovs)
-    if intersect:
-        print(len(intersect))
+    diff = mannaya.symmetric_difference(ovs)
+    if diff:
+        print(len(diff))
     else:
         print('Таких нет')
 
