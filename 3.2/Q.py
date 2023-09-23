@@ -1,33 +1,38 @@
-def solution(a: str):
-    friends = {}
-    friends_2 = {}
-    while a != '':
-        person, friend = a.split()
-        if person not in friends:
-            friends[person] = []
-        if friend not in friends:
-            friends[friend] = []
-        friends[person].append(friend)
-        friends[friend].append(person)
-        a = input()
-    for p, f in friends.items():
-        friends_2[p] = []
-        for fr in f:
-            if fr in friends:
-                friends_2[p] += friends[fr]
-    for man in sorted(friends_2.keys()):
-        print(man, end=': ')
-        friends_out = ''
-        for mfriend in sorted(set(friends_2[man])):
-            if mfriend != man:
-                friends_out += mfriend + ', '
+def solution(friendships_lvl1: dict):
+    friendships_lvl2 = {}
+    for person in friendships_lvl1.keys():
+        if person not in friendships_lvl2:
+            friendships_lvl2[person] = set()
+            for friend in set(friendships_lvl1[person]):
+                friendships_lvl2[person].update(get_next_friendship_lvl(friend, person, friendships_lvl1))
+    for person, friends in sorted(friendships_lvl2.items()):
+        out = f'{person}: '
+        for friend in sorted(friends):
+            out += friend + ', '
+        print(out.strip(', '))
 
-        print(friends_out.removesuffix(', '))
+
+def get_next_friendship_lvl(friend, person, friendships_lvl1: dict):
+    return set(i for i in friendships_lvl1[friend] if i != person and i not in friendships_lvl1[person])
 
 
 def main():
-    a = input()
-    solution(a)
+    user_input = input()
+    friendships_lvl1 = {}
+    while user_input != '':
+        person, friend = user_input.split()
+        if person not in friendships_lvl1:
+            friendships_lvl1[person] = [friend]
+        else:
+            friendships_lvl1[person].append(friend)
+
+        if friend not in friendships_lvl1:
+            friendships_lvl1[friend] = [person]
+        else:
+            friendships_lvl1[friend].append(person)
+        user_input = input()
+
+    solution(friendships_lvl1)
 
 
 if __name__ == '__main__':
