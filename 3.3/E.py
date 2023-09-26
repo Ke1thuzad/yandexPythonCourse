@@ -1,0 +1,1 @@
+{i for i in numbers if i in {j * j for j in range(1, int(i ** 0.5) + 1)}}

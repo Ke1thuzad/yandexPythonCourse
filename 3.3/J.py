@@ -1,0 +1,1 @@
+''.join(letter * times for letter, times in rle)

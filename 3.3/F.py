@@ -1,0 +1,1 @@
+{word: text.count(word) for word in text}
