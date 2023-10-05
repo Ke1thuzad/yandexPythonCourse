@@ -28,4 +28,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-#2 5 ['PERyPApOZv', 'PERyPApOZv', 'cChzISsAVW'] ['cChzISsAVW', 'ntdRhrTQj', 'UBnzvI', 'jCesRC'] ['PERyPApOZv', 'UBnzvI', 'jCesRC', 'ntdRhrTQj']
