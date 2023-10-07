@@ -3,9 +3,9 @@ def solution(size: int, width: int):
         for j in range(1, size + 1):
 
             if j != size:
-                print((str(i * j) + " " if width % 2 else str(i * j)).center(width), end='|')
+                print(f'{i * j: ^{width}}', end='|')
             else:
-                print((str(i * j) + " " if width % 2 else str(i * j)).center(width), end='')
+                print(f'{i * j: ^{width}}', end='')
         print()
         if i != size:
             print('-' * (size * (width + 1) - 1))
