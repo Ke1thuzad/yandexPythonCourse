@@ -1,0 +1,2 @@
+def can_eat(horse_pos: tuple[int, int], figure_pos: tuple[int, int]):
+    return (abs(horse_pos[0] - figure_pos[0]) == 2 and abs(horse_pos[1] - figure_pos[1]) == 1) or (abs(horse_pos[0] - figure_pos[0]) == 1 and abs(horse_pos[1] - figure_pos[1]) == 2)

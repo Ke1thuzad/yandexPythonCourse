@@ -1,7 +1,7 @@
 def binary_search():
     start = 0
     end = 1001
-    mid = end // 2
+    mid = (start + end) // 2
     print(mid)
     response = input()
     while response != 'Угадал!':
