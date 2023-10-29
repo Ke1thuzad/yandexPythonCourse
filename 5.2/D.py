@@ -20,8 +20,8 @@ class Fraction:
 
     def numerator(self, num=None):
         if num is None:
-            return self.numer
-        self.numer = num
+            return abs(self.numer)
+        self.numer = num * self.numer // abs(self.numer)
         self.__shorten()
         return self
 
@@ -40,13 +40,3 @@ class Fraction:
 
     def __neg__(self):
         return Fraction(self.numer * -1, self.denom)
-
-
-a = Fraction('-1/2')
-b = -a
-print(a, b, a is b)
-b.numerator(-b.numerator())
-a.denominator(-3)
-print(a, b)
-print(a.numerator(), a.denominator())
-print(b.numerator(), b.denominator())

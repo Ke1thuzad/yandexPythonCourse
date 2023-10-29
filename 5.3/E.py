@@ -28,6 +28,3 @@ def merge(a: tuple, b: tuple):
         elif j == len(b):
             res += a[m_i:]
     return tuple(res)
-
-
-print(*merge(range(10), range(10)))

@@ -13,7 +13,6 @@ class Rectangle:
         # top left - 0, top right - 1, bot right - 2, bot left - 3
         self.generate_sides()
         self.compute_wh()
-        self.turned = 0
 
     def generate_sides(self):
         self.side_coords = [[min(self.x1, self.x2), max(self.y1, self.y2)],
@@ -21,13 +20,7 @@ class Rectangle:
                             [max(self.x1, self.x2), min(self.y1, self.y2)],
                             [min(self.x1, self.x2), min(self.y1, self.y2)]]
 
-    def update_xys(self):
-        xs = [x for x, y in self.side_coords]
-        ys = [y for x, y in self.side_coords]
-        self.x1, self.x2, self.y1, self.y2 = min(xs), max(xs), min(ys), max(ys)
-
     def compute_wh(self):
-        self.update_xys()
         self.a = abs(self.x1 - self.x2)
         self.b = abs(self.y1 - self.y2)
 
@@ -44,15 +37,9 @@ class Rectangle:
         return round(self.a, 2), round(self.b, 2)
 
     def move(self, dx, dy):
-        self.x1 += dx
-        self.x2 += dx
-        self.y1 += dy
-        self.y2 += dy
-        self.generate_sides()
-
-        # for i in range(len(self.side_coords)):
-        #     x, y = self.side_coords[i]
-        #     self.side_coords[i] = [x + dx, y + dy]
+        for i in range(len(self.side_coords)):
+            x, y = self.side_coords[i]
+            self.side_coords[i] = [x + dx, y + dy]
 
     def resize(self, width, height):
         bot_r_x, bot_r_y = self.side_coords[2]
@@ -61,30 +48,18 @@ class Rectangle:
         self.side_coords[2] = [bot_r_x + new_width * sign(bot_r_x), bot_r_y + new_height * sign(bot_r_y)]
         self.side_coords[3][1] += new_height * sign(self.side_coords[3][1])
         self.side_coords[1][0] += new_width * sign(self.side_coords[1][0])
-        self.update_xys()
-        self.compute_wh()
+        self.a = width
+        self.b = height
 
     def turn(self):
         self.x1, self.x2, self.y1, self.y2 = self.y1, self.y2, self.x1, self.x2
         self.generate_sides()
-        self.update_xys()
         self.compute_wh()
 
     def scale(self, times):
-        self.update_xys()
         self.x1 *= times
         self.x2 *= times
         self.y1 *= times
         self.y2 *= times
         self.generate_sides()
         self.compute_wh()
-
-
-rect = Rectangle((3.14, 2.71), (-3.14, -2.71))
-print(rect.get_pos(), rect.get_size(), sep='\n')
-rect.turn()
-print(rect.get_pos(), rect.get_size(), sep='\n')
-
-
-
-
